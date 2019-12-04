@@ -35,6 +35,7 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavBar()
         view.backgroundColor = .white
         // Do any additional setup after loading the view.
         ClockService.shared.login(completionHandler: { [weak self] (clientInfo, position, wageAmount, wageType, location, manager) in
@@ -42,6 +43,13 @@ class ViewController: UIViewController {
             ws.set(clientInfo: clientInfo, position: position, wageAmount: wageAmount, wageType: wageType, location: location, manager: manager)
             ws.setupViews()
         })
+    }
+    
+    func setupNavBar() {
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.backgroundColor = .clear
+        self.navigationController?.navigationBar.isTranslucent = true
     }
     
     func set(clientInfo: [String: Any], position: [String: Any], wageAmount: String, wageType: String, location: [String: Any], manager: [String: Any]) {
@@ -71,6 +79,11 @@ class ViewController: UIViewController {
         managerView.set(image: "", leftText: "Location Manager", rightText: managerName)
         contactNumberView.set(image: "", leftText: "Contact Number", rightText: managerPhone, attrRightText: NSAttributedString(string: managerPhone, attributes: attributes))
         clockInfoView.set(leftInfoText: "_", rightInfoText: "_")
+        button.onTapButton = { [weak self] in
+            guard let ws = self else { return }
+            let loadingScreen: LoadingScreen = LoadingScreen()
+            ws.navigationController?.present(UINavigationController(rootViewController: loadingScreen), animated: true, completion: nil)
+        }
     }
     
     func setupViews() {
