@@ -36,49 +36,27 @@ class LoadingScreen: UIViewController {
         return progressView
     }()
     
-    var cancelLabel: UILabel = {
-        let cancelLabel: UILabel = UILabel()
-        cancelLabel.font = UIFont.systemFont(ofSize: 15, weight: .bold)
+    var cancelButton: UIButton = {
+        let cancelButton: UIButton = UIButton()
         let underlineStyling: [NSAttributedString.Key : Any] = [
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15, weight: .bold),
-            NSAttributedString.Key.foregroundColor: Colors.gray,
+            NSAttributedString.Key.foregroundColor: UIColor.white,
             NSAttributedString.Key.strikethroughStyle: 0,
             NSAttributedString.Key.underlineStyle:
                true,
             NSAttributedString.Key.paragraphStyle: NSMutableParagraphStyle()
         ]
-        cancelLabel.attributedText = NSAttributedString(string: "Cancel", attributes: underlineStyling)
-        cancelLabel.textAlignment = .center
-        cancelLabel.translatesAutoresizingMaskIntoConstraints = false
-        cancelLabel.textColor = .white
-        cancelLabel.isUserInteractionEnabled = true
-        cancelLabel.isAccessibilityElement = true
-        cancelLabel.accessibilityIdentifier = "cancel_label"
-        cancelLabel.addGestureRecognizer(
-            UITapGestureRecognizer(
-                target: self,
-                action: #selector(onTapCancel)
-            )
-        )
         
-        return cancelLabel
-    }()
-    
-    var cancelTapArea: UIView = {
-        let cancelTapArea: UIView = UIView()
-        cancelTapArea.isUserInteractionEnabled = true
-        cancelTapArea.isAccessibilityElement = true
-        cancelTapArea.accessibilityIdentifier = "cancel_tap_area"
-        cancelTapArea.backgroundColor = .clear
-        cancelTapArea.translatesAutoresizingMaskIntoConstraints = false
-        cancelTapArea.addGestureRecognizer(
-            UITapGestureRecognizer(
-                target: self,
-                action: #selector(onTapCancel)
-            )
-        )
+        cancelButton.backgroundColor = .clear
+        cancelButton.setTitleColor(.white, for: .normal)
+        cancelButton.setTitleColor(.white, for: .highlighted)
+        cancelButton.setAttributedTitle(NSAttributedString(string: "Cancel", attributes: underlineStyling), for: .normal)
+        cancelButton.setAttributedTitle(NSAttributedString(string: "Cancel", attributes: underlineStyling), for: .highlighted)
+        cancelButton.addTarget(self, action: #selector(onTapCancel), for: .touchUpInside)
+        cancelButton.isEnabled = true
+        cancelButton.translatesAutoresizingMaskIntoConstraints = false
         
-        return cancelTapArea
+        return cancelButton
     }()
     
     @objc func onTapCancel() {
@@ -119,9 +97,7 @@ class LoadingScreen: UIViewController {
     func setupViews() {
         view.addSubview(progressView)
         view.addSubview(titleLabel)
-        view.addSubview(cancelLabel)
-        view.addSubview(cancelTapArea)
-        view.bringSubviewToFront(cancelTapArea)
+        view.addSubview(cancelButton)
         layoutViews()
     }
     
@@ -135,14 +111,10 @@ class LoadingScreen: UIViewController {
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             titleLabel.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width - 112),
             titleLabel.heightAnchor.constraint(equalToConstant: 24),
-            cancelTapArea.topAnchor.constraint(equalTo: progressView.bottomAnchor, constant: 24),
-            cancelTapArea.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            cancelTapArea.widthAnchor.constraint(equalToConstant: 51),
-            cancelTapArea.heightAnchor.constraint(equalToConstant: 24),
-            cancelLabel.topAnchor.constraint(equalTo: progressView.bottomAnchor, constant: 24),
-            cancelLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            cancelLabel.widthAnchor.constraint(equalToConstant: 51),
-            cancelLabel.heightAnchor.constraint(equalToConstant: 24)
+            cancelButton.widthAnchor.constraint(equalToConstant: 51),
+            cancelButton.heightAnchor.constraint(equalToConstant: 24),
+            cancelButton.topAnchor.constraint(equalTo: progressView.bottomAnchor, constant: 24),
+            cancelButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
 }
