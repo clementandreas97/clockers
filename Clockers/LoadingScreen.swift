@@ -10,7 +10,7 @@ import UIKit
 import Foundation
 
 struct Const {
-    static let maxTime: Float = 3.0
+    static let maxTime: Float = 10.0
 }
 
 class LoadingScreen: UIViewController {
