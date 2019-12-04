@@ -60,8 +60,11 @@ class ClockInfoView: UIView {
         setupView()
     }
     
-    func set(leftInfoText: String, rightInfoText: String) {
+    func set(leftInfoText: String) {
         leftInfoLabel.text = leftInfoText
+    }
+    
+    func set(rightInfoText: String) {
         rightInfoLabel.text = rightInfoText
     }
     

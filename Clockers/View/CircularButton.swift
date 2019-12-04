@@ -61,7 +61,9 @@ class CircularButton: UIView {
     
     @objc func onTapView() {
         onTapButton?()
-        
+    }
+    
+    func toggleClockingIn() {
         isClockingIn = !isClockingIn
         buttonLabel.text = isClockingIn ? "Clock Out" : "Clock In"
     }

@@ -15,6 +15,10 @@ struct Const {
 
 class LoadingScreen: UIViewController {
     var currentTime: Float = 0.0
+    
+    var isClockingIn: Bool = true
+    var toggleClocking: (() -> Void)?
+    
     var titleLabel: UILabel = {
         let titleLabel: UILabel = UILabel()
         titleLabel.font = UIFont.systemFont(ofSize: 15, weight: .bold)
@@ -59,6 +63,14 @@ class LoadingScreen: UIViewController {
         return cancelButton
     }()
     
+    func set(isClockingIn: Bool) {
+        self.isClockingIn = isClockingIn
+    }
+    
+    func set(toggleClocking: @escaping (() -> Void)) {
+        self.toggleClocking = toggleClocking
+    }
+    
     @objc func onTapCancel() {
         navigationController?.dismiss(animated: true, completion: nil)
     }
@@ -90,11 +102,15 @@ class LoadingScreen: UIViewController {
         if currentTime < Const.maxTime {
             perform(#selector(updateProgress), with: nil, afterDelay: 1.0)
         } else {
+            toggleClocking?()
             navigationController?.dismiss(animated: true, completion: nil)
         }
     }
     
     func setupViews() {
+        if !isClockingIn {
+            titleLabel.text = "Clocking Out..."
+        }
         view.addSubview(progressView)
         view.addSubview(titleLabel)
         view.addSubview(cancelButton)

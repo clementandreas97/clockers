@@ -61,4 +61,60 @@ class ClockService {
                 }
         }
     }
+    
+    // TODO: Add Handler for passing the time
+    func clockIn(lat: Double, long: Double) {
+        guard let url = URL(string: "https://api.helpster.tech/v1/staff-requests/26074/clock-in/") else { return }
+        
+        let header: HTTPHeaders = [
+            "Authorization": "\(ClockService.shared.authorizationKey)"
+        ]
+        
+        let clockParams: [String: Any] = [
+            "latitute": "\(lat)",
+            "longitude": "\(long)"
+        ]
+        
+        Alamofire
+            .request(url, method: .post, parameters: clockParams, headers: header)
+            .validate()
+            .responseJSON { response in
+                guard response.result.isSuccess,
+                    let jsonObj = response.result.value as? [String: Any] else { return }
+                if let clockInTime = jsonObj["clock_in_time"] as? String {
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+                    let date = dateFormatter.date(from: clockInTime)
+                    // Pass the date to handler
+                }
+        }
+    }
+    
+    // TODO: Add Handler for passing the time
+    func clockOut(lat: Double, long: Double) {
+        guard let url = URL(string: "https://api.helpster.tech/v1/staff-requests/26074/clock-out/") else { return }
+        
+        let header: HTTPHeaders = [
+            "Authorization": "\(ClockService.shared.authorizationKey)"
+        ]
+        
+        let clockParams: [String: Any] = [
+            "latitute": "\(lat)",
+            "longitude": "\(long)"
+        ]
+        
+        Alamofire
+            .request(url, method: .post, parameters: clockParams, headers: header)
+            .validate()
+            .responseJSON { response in
+                guard response.result.isSuccess,
+                    let jsonObj = response.result.value as? [String: Any] else { return }
+                if let clockOutTime = jsonObj["clock_in_time"] as? String {
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+                    let date = dateFormatter.date(from: clockOutTime)
+                    // Pass the date to handler
+                }
+        }
+    }
 }

@@ -31,6 +31,8 @@ class ViewController: UIViewController {
     var clockInfoView = ClockInfoView()
     var button = CircularButton()
     
+    var isClockingIn: Bool = true
+    
     var locationString: String = ""
 
     override func viewDidLoad() {
@@ -78,10 +80,35 @@ class ViewController: UIViewController {
         addressView.set(imageString: "", text: locationString)
         managerView.set(image: "", leftText: "Location Manager", rightText: managerName)
         contactNumberView.set(image: "", leftText: "Contact Number", rightText: managerPhone, attrRightText: NSAttributedString(string: managerPhone, attributes: attributes))
-        clockInfoView.set(leftInfoText: "_", rightInfoText: "_")
+        clockInfoView.set(leftInfoText: "_")
+        clockInfoView.set(rightInfoText: "_")
         button.onTapButton = { [weak self] in
             guard let ws = self else { return }
             let loadingScreen: LoadingScreen = LoadingScreen()
+            loadingScreen.set(isClockingIn: ws.button.buttonLabel.text == "Clock In")
+            loadingScreen.set(toggleClocking: { [weak self] in
+                let date = Date()
+                let calendar = Calendar.current
+                let hour = calendar.component(.hour, from: date)
+                let minutes = calendar.component(.minute, from: date)
+                let dateString: String = "\(hour):\(minutes)"
+                let dateFormatter = DateFormatter()
+                dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+                dateFormatter.dateFormat = "H:mm"
+                var convertedTime: String = "_"
+                if let inDate = dateFormatter.date(from: dateString) {
+                    dateFormatter.dateFormat = "h:mm a"
+                    convertedTime = dateFormatter.string(from:inDate)
+                }
+                if ws.button.buttonLabel.text == "Clock In" {
+                    ws.clockInfoView.set(leftInfoText: convertedTime)
+                    ws.button.toggleClockingIn()
+                } else {
+                    ws.clockInfoView.set(rightInfoText: convertedTime)
+                    ws.button.isHidden = true
+                }
+                
+            })
             ws.navigationController?.present(UINavigationController(rootViewController: loadingScreen), animated: true, completion: nil)
         }
     }
