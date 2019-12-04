@@ -40,7 +40,7 @@ class ImageTextView: UIView {
     
     convenience init(imageString: String, text: String) {
         self.init(frame: CGRect.zero)
-        imageView.image = UIImage(named: imageString)
+        imageView.image = UIImage(named: imageString)?.tint(color: Colors.gray)
         textLabel.text = text
         setupView()
     }
@@ -59,8 +59,11 @@ class ImageTextView: UIView {
     
     func layoutViews() {
         NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: topAnchor),
-            imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 28),
+            imageView.topAnchor.constraint(equalTo: topAnchor, constant: 2),
+            imageView.leadingAnchor.constraint(equalTo
+                : leadingAnchor, constant: 28),
+            imageView.widthAnchor.constraint(equalToConstant: 10),
+            imageView.heightAnchor.constraint(equalToConstant: 10),
             textLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 8),
             textLabel.topAnchor.constraint(equalTo: topAnchor),
             textLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -28)

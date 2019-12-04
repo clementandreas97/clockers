@@ -77,9 +77,9 @@ class ViewController: UIViewController {
         ]
         
         titleView.set(leftTitle: positionName, leftInfo: clientName, rightTitle: "Rp \(wageAmount)", rightInfo: formattedWageType)
-        addressView.set(imageString: "", text: locationString)
-        managerView.set(image: "", leftText: "Location Manager", rightText: managerName)
-        contactNumberView.set(image: "", leftText: "Contact Number", rightText: managerPhone, attrRightText: NSAttributedString(string: managerPhone, attributes: attributes))
+        addressView.set(imageString: "location", text: locationString)
+        managerView.set(image: "person", leftText: "Location Manager", rightText: managerName)
+        contactNumberView.set(image: "phone", leftText: "Contact Number", rightText: managerPhone, attrRightText: NSAttributedString(string: managerPhone, attributes: attributes))
         clockInfoView.set(leftInfoText: "_")
         clockInfoView.set(rightInfoText: "_")
         button.onTapButton = { [weak self] in

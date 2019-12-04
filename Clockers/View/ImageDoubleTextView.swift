@@ -48,6 +48,7 @@ class ImageDoubleTextView: UIView {
     }
     
     func set(image: String, leftText: String, rightText: String, attrRightText: NSAttributedString? = nil) {
+        imageView.image = UIImage(named: image)?.tint(color: Colors.gray)
         leftTextLabel.text = leftText
         rightTextLabel.text = rightText
         if let rightAttr = attrRightText {
@@ -67,7 +68,9 @@ class ImageDoubleTextView: UIView {
         let maximumWidth: CGFloat = UIScreen.main.bounds.width / 2 - 28
         NSLayoutConstraint.activate([
             imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 28),
-            imageView.topAnchor.constraint(equalTo: topAnchor),
+            imageView.topAnchor.constraint(equalTo: topAnchor, constant: 2),
+            imageView.widthAnchor.constraint(equalToConstant: 10),
+            imageView.heightAnchor.constraint(equalToConstant: 10),
             leftTextLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 8),
             leftTextLabel.topAnchor.constraint(equalTo: topAnchor),
             rightTextLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -28),
