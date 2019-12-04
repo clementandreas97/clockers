@@ -22,6 +22,7 @@
 		E4B4F16623969BA9006980BB /* CircularButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B4F16523969BA9006980BB /* CircularButton.swift */; };
 		E4B4F16923969C79006980BB /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B4F16823969C79006980BB /* Colors.swift */; };
 		E4B4F16B2397752B006980BB /* ClockService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B4F16A2397752B006980BB /* ClockService.swift */; };
+		E4B4F16D23979108006980BB /* LoadingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B4F16C23979108006980BB /* LoadingScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		E4B4F16523969BA9006980BB /* CircularButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularButton.swift; sourceTree = "<group>"; };
 		E4B4F16823969C79006980BB /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		E4B4F16A2397752B006980BB /* ClockService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockService.swift; sourceTree = "<group>"; };
+		E4B4F16C23979108006980BB /* LoadingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +133,7 @@
 				E448B337239566E000A41986 /* Assets.xcassets */,
 				E448B339239566E000A41986 /* LaunchScreen.storyboard */,
 				E448B33C239566E000A41986 /* Info.plist */,
+				E4B4F16C23979108006980BB /* LoadingScreen.swift */,
 			);
 			path = Clockers;
 			sourceTree = "<group>";
@@ -333,6 +336,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4B4F16D23979108006980BB /* LoadingScreen.swift in Sources */,
 				E448B333239566DB00A41986 /* ViewController.swift in Sources */,
 				E4B4F1642396972F006980BB /* ClockInfoView.swift in Sources */,
 				E4B4F16023966889006980BB /* ImageTextView.swift in Sources */,
